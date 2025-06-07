@@ -19,14 +19,23 @@
             --shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
             --border: #e0e0e0;
             --background-dark: #1a1a1a;
-            --text-dark: #e0e0e0;
+            --text-dark: #e8eaed;
+            --navtext: #ffffff;
+            --text: var(--dark);
+            /* Default text color */
         }
 
         [data-theme="dark"] {
             --background: var(--background-dark);
             --text: var(--text-dark);
             --light: #2c2c2c;
-            --border: #3a3a3a;
+            --border: #424242;
+            --navtext: #ffffff;
+            --primary: #8ab4f8;
+            /* FIX: Readable light blue for dark mode */
+            --primary-dark: #a8c7fa;
+            /* FIX: Lighter blue for hover in dark mode */
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         }
 
         * {
@@ -38,7 +47,8 @@
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             background: var(--background, #f4f6f8);
-            color: var(--text, var(--dark));
+            color: var(--text);
+            /* FIX: Simplified color definition */
             min-height: 100vh;
             padding: 15px;
             transition: background 0.3s, color 0.3s;
@@ -82,10 +92,16 @@
             font-size: 0.95rem;
         }
 
+        [data-theme="dark"] .header .subtitle {
+            color: #9aa0a6;
+            /* FIX: Better subtitle color */
+        }
+
         .nav-tabs {
             display: flex;
             margin-bottom: 25px;
             border-bottom: 1px solid var(--border);
+            color: var(--navtext);
         }
 
         .nav-tab {
@@ -98,16 +114,29 @@
             border-top-right-radius: 4px;
             margin-right: 5px;
             transition: all 0.2s;
+            border: 1px solid var(--border);
+            color: var(--text);
+            /* Make default tab text readable */
         }
 
         .nav-tab.active {
             background: var(--primary);
-            color: white;
+            color: var(--navtext);
+        }
+
+        [data-theme="dark"] .nav-tab.active {
+            color: #202124;
+            /* Dark text on light blue bg */
         }
 
         .nav-tab:hover:not(.active) {
             background: var(--primary-dark);
-            color: white;
+            color: var(--navtext);
+        }
+
+        [data-theme="dark"] .nav-tab:hover:not(.active) {
+            color: #202124;
+            /* Dark text on light blue bg */
         }
 
         .tab-content {
@@ -160,6 +189,12 @@
             transition: border-color 0.2s, background 0.3s;
         }
 
+        [data-theme="dark"] .form-group input,
+        [data-theme="dark"] .form-group select {
+            background: #3c4043;
+            /* Darker input background */
+        }
+
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
@@ -170,6 +205,13 @@
         .form-group input[readonly] {
             background: var(--background, #f5f5f5);
             cursor: not-allowed;
+        }
+
+        [data-theme="dark"] input#netto {
+            background: #203c22 !important;
+            /* FIX: Dark green for dark mode */
+            color: #a7ffaf !important;
+            /* FIX: Light green text */
         }
 
         .form-group .error {
@@ -199,12 +241,22 @@
         }
 
         .btn-primary {
-            background: var(--primary);
+            background: darkgray;
             color: white;
         }
 
         .btn-primary:hover:not(:disabled) {
-            background: var(--primary-dark);
+            background: rgb(36, 36, 36);
+        }
+
+        [data-theme="dark"] .btn-primary {
+            background: #3c4043;
+            color: #e8eaed;
+            border: 1px solid #5f6368;
+        }
+
+        [data-theme="dark"] .btn-primary:hover:not(:disabled) {
+            background: #5f6368;
         }
 
         .btn-success {
@@ -299,6 +351,11 @@
             border-top-right-radius: 6px;
         }
 
+        [data-theme="dark"] .ticket-header {
+            color: var(--text);
+            /* FIX: Make header text readable */
+        }
+
         .company-info {
             display: flex;
             justify-content: space-between;
@@ -352,6 +409,13 @@
             color: black;
         }
 
+        [data-theme="dark"] .netto-row td {
+            color: var(--text);
+            /* FIX: Make netto text readable */
+            border-color: var(--text);
+            /* FIX: Make border visible */
+        }
+
         .signature-area {
             display: flex;
             justify-content: space-between;
@@ -373,6 +437,10 @@
             font-weight: 500;
         }
 
+        [data-theme="dark"] .signature-line {
+            border-top-color: var(--text);
+        }
+
         .report-container {
             background: var(--light);
             border-radius: 6px;
@@ -386,6 +454,11 @@
             color: white;
             padding: 15px;
             text-align: center;
+        }
+
+        [data-theme="dark"] .report-header {
+            color: #202124;
+            /* Darker text for light blue header */
         }
 
         .report-stats {
@@ -449,6 +522,10 @@
             cursor: pointer;
         }
 
+        [data-theme="dark"] .report-table th {
+            color: #202124;
+        }
+
         .report-table th.sortable:hover {
             background: var(--primary-dark);
         }
@@ -471,8 +548,17 @@
             background: var(--background, #f5f5f5);
         }
 
+        [data-theme="dark"] .report-table tbody tr:nth-child(even) {
+            background: #3c4043;
+        }
+
         .report-table tbody tr:hover {
             background: #e3f2fd;
+        }
+
+        [data-theme="dark"] .report-table tbody tr:hover {
+            background-color: rgba(138, 180, 248, 0.2);
+            /* FIX: Better hover for dark mode */
         }
 
         .actions-cell {
@@ -517,6 +603,11 @@
             right: 20px;
             z-index: 1001;
             /* Di atas overlay */
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            background-color: #3c4043;
+            color: #e8eaed;
         }
 
         /* Area khusus untuk mencetak, tersembunyi di layar biasa */
@@ -647,7 +738,43 @@
                 --background: var(--background-dark);
                 --text: var(--text-dark);
                 --light: #2c2c2c;
-                --border: #3a3a3a;
+                --border: #424242;
+                --primary: #8ab4f8;
+                --primary-dark: #a8c7fa;
+                --shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            }
+
+            /* Apply the same specific fixes for OS-level dark mode */
+            body:not([data-theme="light"]) .header .subtitle {
+                color: #9aa0a6;
+            }
+
+            body:not([data-theme="light"]) .ticket-header,
+            body:not([data-theme="light"]) .netto-row td {
+                color: var(--text);
+            }
+
+            body:not([data-theme="light"]) .netto-row td {
+                border-color: var(--text);
+            }
+
+            body:not([data-theme="light"]) input#netto {
+                background: #203c22 !important;
+                color: #a7ffaf !important;
+            }
+
+            body:not([data-theme="light"]) .report-table tbody tr:hover {
+                background-color: rgba(138, 180, 248, 0.2);
+            }
+
+            body:not([data-theme="light"]) .btn-primary {
+                background: #3c4043;
+                color: #e8eaed;
+                border: 1px solid #5f6368;
+            }
+
+            body:not([data-theme="light"]) .btn-primary:hover:not(:disabled) {
+                background: #5f6368;
             }
         }
     </style>
@@ -656,27 +783,20 @@
 <body>
     <button class="btn btn-primary theme-toggle" id="themeToggle" aria-label="Toggle tema gelap/terang">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path
-                d="M12 16a4 4 0 0 0 0-8v8zm0-12a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1zm0 14a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM5 12a1 1 0 0 1-1-1H2a1 1 0 1 1 0-2h2a1 1 0 0 1 1 1v0a1 1 0 0 1-1 1zm17 0a1 1 0 0 1-1-1v0a1 1 0 0 1-1-1h2a1 1 0 1 1 0 2h-2z" />
+            <path d="M12 16a4 4 0 0 0 0-8v8zm0-12a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1zm0 14a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM5 12a1 1 0 0 1-1-1H2a1 1 0 1 1 0-2h2a1 1 0 0 1 1 1v0a1 1 0 0 1-1 1zm17 0a1 1 0 0 1-1-1v0a1 1 0 0 1-1-1h2a1 1 0 1 1 0 2h-2z" />
         </svg>
     </button>
-
     <div class="container">
         <div class="header">
             <img src="res/logo.png" alt="Logo PT. Sumber Ganda Mekar" class="logo">
             <h1>Sistem Timbangan Digital</h1>
             <p class="subtitle">PT. Sumber Ganda Mekar - Solusi Pengelolaan Timbangan Profesional</p>
         </div>
-
         <div class="nav-tabs" role="tablist">
-            <button class="nav-tab active" data-tab="weighing" role="tab" aria-selected="true"
-                aria-controls="weighing">Data Timbangan</button>
-            <button class="nav-tab" data-tab="reports" role="tab" aria-selected="false"
-                aria-controls="reports">Laporan</button>
-            <button class="nav-tab" data-tab="settings" role="tab" aria-selected="false"
-                aria-controls="settings">Pengaturan</button>
+            <button class="nav-tab active" data-tab="weighing" role="tab" aria-selected="true" aria-controls="weighing">Data Timbangan</button>
+            <button class="nav-tab" data-tab="reports" role="tab" aria-selected="false" aria-controls="reports">Laporan</button>
+            <button class="nav-tab" data-tab="settings" role="tab" aria-selected="false" aria-controls="settings">Pengaturan</button>
         </div>
-
         <div id="weighing" class="tab-content active" role="tabpanel">
             <div class="form-section">
                 <h3>Pengisian Data Timbangan</h3>
@@ -685,57 +805,47 @@
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="vehicleNumber">Nomor Kendaraan</label>
-                            <input type="text" id="vehicleNumber" list="vehicleList"
-                                placeholder="Masukkan nomor kendaraan" required maxlength="20"
-                                aria-describedby="vehicleNumberError">
+                            <input type="text" id="vehicleNumber" list="vehicleList" placeholder="Masukkan nomor kendaraan" required maxlength="20" aria-describedby="vehicleNumberError">
                             <datalist id="vehicleList"></datalist>
                             <div class="error" id="vehicleNumberError"></div>
                         </div>
                         <div class="form-group">
                             <label for="customer">Nama Pelanggan</label>
-                            <input type="text" id="customer" list="customerList" placeholder="Masukkan nama pelanggan"
-                                required maxlength="100" aria-describedby="customerError">
+                            <input type="text" id="customer" list="customerList" placeholder="Masukkan nama pelanggan" required maxlength="100" aria-describedby="customerError">
                             <datalist id="customerList"></datalist>
                             <div class="error" id="customerError"></div>
                         </div>
                         <div class="form-group">
                             <label for="itemName">Nama Barang</label>
-                            <input type="text" id="itemName" list="itemList" placeholder="Masukkan nama barang" required
-                                maxlength="100" aria-describedby="itemNameError">
+                            <input type="text" id="itemName" list="itemList" placeholder="Masukkan nama barang" required maxlength="100" aria-describedby="itemNameError">
                             <datalist id="itemList"></datalist>
                             <div class="error" id="itemNameError"></div>
                         </div>
                         <div class="form-group">
                             <label for="gross">Gross (kg)</label>
-                            <input type="number" id="gross" placeholder="0.00" step="0.01" min="0" max="1000000"
-                                required aria-describedby="grossError">
+                            <input type="number" id="gross" placeholder="0.00" step="0.01" min="0" max="1000000" required aria-describedby="grossError">
                             <div class="error" id="grossError"></div>
                         </div>
                         <div class="form-group">
                             <label for="tare">Tare (kg)</label>
-                            <input type="number" id="tare" placeholder="0.00" step="0.01" min="0" max="1000000" required
-                                aria-describedby="tareError">
+                            <input type="number" id="tare" placeholder="0.00" step="0.01" min="0" max="1000000" required aria-describedby="tareError">
                             <div class="error" id="tareError"></div>
                         </div>
                         <div class="form-group">
                             <label for="netto">Netto (kg)</label>
-                            <input type="number" id="netto" readonly style="background: #e8f5e9; font-weight: 600;"
-                                aria-describedby="nettoDescription">
+                            <input type="number" id="netto" readonly style="background: #e8f5e9; font-weight: 600;" aria-describedby="nettoDescription">
                             <span id="nettoDescription" class="hidden">Berat bersih yang dihitung otomatis</span>
                         </div>
                         <div class="form-group">
                             <label for="notes">Catatan</label>
-                            <input type="text" id="notes" placeholder="Masukkan catatan tambahan" maxlength="200"
-                                aria-describedby="notesDescription">
+                            <input type="text" id="notes" placeholder="Masukkan catatan tambahan" maxlength="200" aria-describedby="notesDescription">
                             <span id="notesDescription" class="hidden">Catatan tambahan (opsional)</span>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary btn-full" id="submitBtn">Simpan Data Timbangan</button>
                 </form>
             </div>
-
             <div id="successMessage" class="success-message hidden" role="alert">Data timbangan berhasil disimpan!</div>
-
             <div id="ticketContainer" class="ticket-container hidden">
                 <div class="loading-overlay" id="ticketLoading">
                     <div class="spinner" aria-label="Memuat tiket"></div>
@@ -746,7 +856,6 @@
                 </div>
             </div>
         </div>
-
         <div id="reports" class="tab-content" role="tabpanel">
             <div class="report-container">
                 <div class="loading-overlay" id="reportLoading">
@@ -755,7 +864,6 @@
                 <div class="report-header">
                     <h2>Laporan Transaksi Timbangan</h2>
                 </div>
-
                 <div class="report-stats">
                     <div class="stat-item">
                         <div class="stat-number" id="totalRecords">0</div>
@@ -770,7 +878,6 @@
                         <div class="stat-label">Transaksi Hari Ini</div>
                     </div>
                 </div>
-
                 <div class="filters-section">
                     <div class="filters-grid">
                         <div class="form-group">
@@ -794,8 +901,7 @@
                         </div>
                         <div class="form-group">
                             <label for="searchQuery">Pencarian</label>
-                            <input type="text" id="searchQuery" placeholder="Cari nomor kendaraan, pelanggan..."
-                                aria-describedby="searchQueryDescription">
+                            <input type="text" id="searchQuery" placeholder="Cari nomor kendaraan, pelanggan..." aria-describedby="searchQueryDescription">
                             <span id="searchQueryDescription" class="hidden">Cari berdasarkan nomor kendaraan,
                                 pelanggan, atau barang</span>
                         </div>
@@ -805,7 +911,6 @@
                         <button id="resetFilters" class="btn btn-warning">Reset Filter</button>
                     </div>
                 </div>
-
                 <div class="table-container">
                     <table class="report-table" role="grid">
                         <thead>
@@ -826,7 +931,6 @@
                         <tbody id="reportTableBody"></tbody>
                     </table>
                 </div>
-
                 <div class="report-actions">
                     <button id="exportExcelBtn" class="btn btn-success">Ekspor ke Excel</button>
                     <button id="exportPdfBtn" class="btn btn-primary">Ekspor ke PDF</button>
@@ -836,7 +940,6 @@
                 </div>
             </div>
         </div>
-
         <div id="settings" class="tab-content" role="tabpanel">
             <div class="form-section">
                 <h3>Pengaturan Sistem</h3>
@@ -847,13 +950,11 @@
                     </div>
                     <div class="form-group">
                         <label for="companyAddress">Alamat Perusahaan</label>
-                        <input type="text" id="companyAddress"
-                            value="Jl. Raya Gedebage No.95 - Bandung, Jawa Barat - Indonesia" maxlength="200" required>
+                        <input type="text" id="companyAddress" value="Jl. Raya Gedebage No.95 - Bandung, Jawa Barat - Indonesia" maxlength="200" required>
                     </div>
                     <div class="form-group">
                         <label for="companyPhone">Nomor Telepon</label>
-                        <input type="text" id="companyPhone" value="+62 821-1780-0626 (Irwan) +62 823-1818-8863 (Uwem)"
-                            maxlength="200" required>
+                        <input type="text" id="companyPhone" value="+62 821-1780-0626 (Irwan) +62 823-1818-8863 (Uwem)" maxlength="200" required>
                     </div>
                     <div class="form-group">
                         <label for="autoBackup">Pencadangan Otomatis</label>
@@ -887,13 +988,12 @@
             </div>
         </div>
     </div>
-
     <div id="print-area"></div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script>
+        // Javascript code remains the same
         document.addEventListener('DOMContentLoaded', () => {
             // =================================================================================
             // KELAS UTAMA APLIKASI SISTEM TIMBANGAN
@@ -1032,7 +1132,9 @@
                     };
                     try {
                         const settings = localStorage.getItem(this.settingsKey);
-                        return settings ? { ...defaults, ...JSON.parse(settings) } : defaults;
+                        return settings ? { ...defaults,
+                            ...JSON.parse(settings)
+                        } : defaults;
                     } catch (e) {
                         console.error('Error loading settings:', e);
                         this.showError('Gagal memuat pengaturan.');
@@ -1218,8 +1320,16 @@
                         tare: parseFloat(this.tareInput.value) || 0,
                         netto: netto,
                         notes: this.notesInput.value.trim().slice(0, 200),
-                        date: now.toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\./g, '/'),
-                        time: now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' }).replace(/\./g, ':'),
+                        date: now.toLocaleDateString('id-ID', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric'
+                        }).replace(/\./g, '/'),
+                        time: now.toLocaleTimeString('id-ID', {
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            second: '2-digit'
+                        }).replace(/\./g, ':'),
                         timestamp: now.toISOString()
                     };
 
@@ -1287,45 +1397,45 @@
                  */
                 generateTicketHTML(ticket) {
                     return `
-                        <div class="ticket-print-content">
-                            <div class="ticket-header">
-                                <div class="company-info">
+                                <div class="ticket-print-content">
+                                    <div class="ticket-header">
+                                        <div class="company-info">
 
-                                    <img src="res/logo.png" alt="Logo Perusahaan" style="max-width: 150px; height: auto; margin-right: 15px;">
+                                            <img src="res/logo.png" alt="Logo Perusahaan" style="max-width: 150px; height: auto; margin-right: 15px;">
 
-                                    <div class="company-details">
-                                        <h3>${this.settings.companyName}</h3>
-                                        <p>${this.settings.companyAddress}</p>
-                                        <p>Telp: ${this.settings.companyPhone}</p>
+                                            <div class="company-details">
+                                                <h3>${this.settings.companyName}</h3>
+                                                <p>${this.settings.companyAddress}</p>
+                                                <p>Telp: ${this.settings.companyPhone}</p>
+                                            </div>
+                                            <h2 class="ticket-title">TIKET TIMBANGAN</h2>
+                                        </div>
                                     </div>
-                                    <h2 class="ticket-title">TIKET TIMBANGAN</h2>
+                                    <div class="ticket-body">
+                                        <table class="ticket-table">
+                                            <tr><td>No. Tiket</td><td>: ${ticket.id}</td></tr>
+                                            <tr><td>Tanggal Masuk</td><td>: ${ticket.date} / ${ticket.time}</td></tr>
+                                            <tr><td>No. Kendaraan</td><td>: ${ticket.vehicleNumber}</td></tr>
+                                            <tr><td>Nama Pelanggan</td><td>: ${ticket.customer}</td></tr>
+                                            <tr><td>Nama Barang</td><td>: ${ticket.itemName}</td></tr>
+                                            <tr><td>Berat Kotor (Gross)</td><td>: ${ticket.gross.toLocaleString('id-ID')} kg</td></tr>
+                                            <tr><td>Berat Kosong (Tare)</td><td>: ${ticket.tare.toLocaleString('id-ID')} kg</td></tr>
+                                            <tr class="netto-row"><td>Berat Bersih (Netto)</td><td>: ${ticket.netto.toLocaleString('id-ID')} kg</td></tr>
+                                            ${ticket.notes ? `<tr><td>Catatan</td><td>: ${ticket.notes}</td></tr>` : ''}
+                                        </table>
+                                        <div class="signature-area">
+                                            <div class="signature-box">
+                                                <p>Penimbang</p>
+                                                <div class="signature-line">(..................)</div>
+                                            </div>
+                                            <div class="signature-box">
+                                                <p>Pengemudi</p>
+                                                <div class="signature-line">(..................)</div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="ticket-body">
-                                <table class="ticket-table">
-                                    <tr><td>No. Tiket</td><td>: ${ticket.id}</td></tr>
-                                    <tr><td>Tanggal Masuk</td><td>: ${ticket.date} / ${ticket.time}</td></tr>
-                                    <tr><td>No. Kendaraan</td><td>: ${ticket.vehicleNumber}</td></tr>
-                                    <tr><td>Nama Pelanggan</td><td>: ${ticket.customer}</td></tr>
-                                    <tr><td>Nama Barang</td><td>: ${ticket.itemName}</td></tr>
-                                    <tr><td>Berat Kotor (Gross)</td><td>: ${ticket.gross.toLocaleString('id-ID')} kg</td></tr>
-                                    <tr><td>Berat Kosong (Tare)</td><td>: ${ticket.tare.toLocaleString('id-ID')} kg</td></tr>
-                                    <tr class="netto-row"><td>Berat Bersih (Netto)</td><td>: ${ticket.netto.toLocaleString('id-ID')} kg</td></tr>
-                                    ${ticket.notes ? `<tr><td>Catatan</td><td>: ${ticket.notes}</td></tr>` : ''}
-                                </table>
-                                <div class="signature-area">
-                                    <div class="signature-box">
-                                        <p>Penimbang</p>
-                                        <div class="signature-line">(..................)</div>
-                                    </div>
-                                    <div class="signature-box">
-                                        <p>Pengemudi</p>
-                                        <div class="signature-line">(..................)</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                            `;
                 }
 
                 /**
@@ -1375,7 +1485,11 @@
                  */
                 applyFilters() {
                     this.reportLoading.classList.add('active');
-                    const dateFilter = this.filterDate.value ? new Date(this.filterDate.value).toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\./g, '/') : '';
+                    const dateFilter = this.filterDate.value ? new Date(this.filterDate.value).toLocaleDateString('id-ID', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    }).replace(/\./g, '/') : '';
                     const customerFilter = this.filterCustomer.value.toLowerCase();
                     const itemFilter = this.filterItem.value.toLowerCase();
                     const searchFilter = this.searchQuery.value.toLowerCase();
@@ -1415,9 +1529,16 @@
                 updateStats() {
                     this.totalRecordsEl.textContent = this.filteredData.length.toLocaleString('id-ID');
                     const totalWeight = this.filteredData.reduce((sum, d) => sum + d.netto, 0);
-                    this.totalWeightEl.textContent = totalWeight.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    this.totalWeightEl.textContent = totalWeight.toLocaleString('id-ID', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
 
-                    const todayStr = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\./g, '/');
+                    const todayStr = new Date().toLocaleDateString('id-ID', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    }).replace(/\./g, '/');
                     const todayRecords = this.data.filter(d => d.date === todayStr).length;
                     this.todayRecordsEl.textContent = todayRecords.toLocaleString('id-ID');
                 }
@@ -1435,22 +1556,22 @@
                     this.filteredData.forEach((d, index) => {
                         const row = document.createElement('tr');
                         row.innerHTML = `
-                            <td>${index + 1}</td>
-                            <td>${d.id}</td>
-                            <td>${d.date}</td>
-                            <td>${d.time}</td>
-                            <td>${d.vehicleNumber}</td>
-                            <td>${d.customer}</td>
-                            <td>${d.itemName}</td>
-                            <td>${d.gross.toLocaleString('id-ID')}</td>
-                            <td>${d.tare.toLocaleString('id-ID')}</td>
-                            <td>${d.netto.toLocaleString('id-ID')}</td>
-                            <td class="actions-cell">
-                                <button class="btn btn-sm btn-primary" data-action="edit" data-id="${d.id}">Ubah</button>
-                                <button class="btn btn-sm btn-danger" data-action="delete" data-id="${d.id}">Hapus</button>
-                                <button class="btn btn-sm btn-success" data-action="print" data-id="${d.id}">Cetak</button>
-                            </td>
-                        `;
+                                <td>${index + 1}</td>
+                                <td>${d.id}</td>
+                                <td>${d.date}</td>
+                                <td>${d.time}</td>
+                                <td>${d.vehicleNumber}</td>
+                                <td>${d.customer}</td>
+                                <td>${d.itemName}</td>
+                                <td>${d.gross.toLocaleString('id-ID')}</td>
+                                <td>${d.tare.toLocaleString('id-ID')}</td>
+                                <td>${d.netto.toLocaleString('id-ID')}</td>
+                                <td class="actions-cell">
+                                    <button class="btn btn-sm btn-primary" data-action="edit" data-id="${d.id}">Ubah</button>
+                                    <button class="btn btn-sm btn-danger" data-action="delete" data-id="${d.id}">Hapus</button>
+                                    <button class="btn btn-sm btn-success" data-action="print" data-id="${d.id}">Cetak</button>
+                                </td>
+                            `;
                         fragment.appendChild(row);
                     });
                     this.reportTableBody.appendChild(fragment);
@@ -1487,7 +1608,10 @@
                         }
                     }
 
-                    const collator = new Intl.Collator('id-ID', { numeric: true, sensitivity: 'base' });
+                    const collator = new Intl.Collator('id-ID', {
+                        numeric: true,
+                        sensitivity: 'base'
+                    });
                     this.filteredData.sort((a, b) => {
                         let aVal, bVal;
                         // Sorting berdasarkan timestamp untuk kolom tanggal agar lebih akurat
@@ -1528,16 +1652,18 @@
 
                     // Dapatkan tanggal hari ini untuk judul
                     const today = new Date().toLocaleDateString('id-ID', {
-                        day: '2-digit', month: 'long', year: 'numeric'
+                        day: '2-digit',
+                        month: 'long',
+                        year: 'numeric'
                     });
 
                     // Buat data untuk bagian atas Excel (Judul, tanggal, baris kosong, dan header tabel)
                     const headerData = [
                         ["LAPORAN TRANSAKSI TIMBANGAN"], // Baris 1: Judul Utama
-                        [`PT. Sumber Ganda Mekar`],       // Baris 2: Nama Perusahaan
-                        [`Tanggal Laporan: ${today}`],    // Baris 3: Tanggal Laporan
-                        [],                               // Baris 4: Baris kosong sebagai spasi
-                        [                                 // Baris 5: Header untuk tabel data Anda
+                        [`PT. Sumber Ganda Mekar`], // Baris 2: Nama Perusahaan
+                        [`Tanggal Laporan: ${today}`], // Baris 3: Tanggal Laporan
+                        [], // Baris 4: Baris kosong sebagai spasi
+                        [ // Baris 5: Header untuk tabel data Anda
                             'No.',
                             'No. Tiket',
                             'Tanggal',
@@ -1571,21 +1697,42 @@
                     ]);
 
                     // Tambahkan data body ke worksheet yang sudah ada, dimulai dari baris ke-6 (karena baris 1-5 sudah diisi)
-                    XLSX.utils.sheet_add_aoa(ws, bodyData, { origin: 'A6' });
+                    XLSX.utils.sheet_add_aoa(ws, bodyData, {
+                        origin: 'A6'
+                    });
 
                     // --- LANGKAH 3: (Opsional) Atur Lebar Kolom ---
 
-                    ws['!cols'] = [
-                        { wch: 5 },  // Lebar kolom A (No.)
-                        { wch: 22 }, // Lebar kolom B (No. Tiket)
-                        { wch: 12 }, // Lebar kolom C (Tanggal)
-                        { wch: 10 }, // Lebar kolom D (Waktu)
-                        { wch: 15 }, // Lebar kolom E (Kendaraan)
-                        { wch: 25 }, // Lebar kolom F (Pelanggan)
-                        { wch: 25 }, // Lebar kolom G (Nama Barang)
-                        { wch: 12 }, // Lebar kolom H (Gross)
-                        { wch: 12 }, // Lebar kolom I (Tare)
-                        { wch: 12 }  // Lebar kolom J (Netto)
+                    ws['!cols'] = [{
+                        wch: 5
+                    }, // Lebar kolom A (No.)
+                    {
+                        wch: 22
+                    }, // Lebar kolom B (No. Tiket)
+                    {
+                        wch: 12
+                    }, // Lebar kolom C (Tanggal)
+                    {
+                        wch: 10
+                    }, // Lebar kolom D (Waktu)
+                    {
+                        wch: 15
+                    }, // Lebar kolom E (Kendaraan)
+                    {
+                        wch: 25
+                    }, // Lebar kolom F (Pelanggan)
+                    {
+                        wch: 25
+                    }, // Lebar kolom G (Nama Barang)
+                    {
+                        wch: 12
+                    }, // Lebar kolom H (Gross)
+                    {
+                        wch: 12
+                    }, // Lebar kolom I (Tare)
+                    {
+                        wch: 12
+                    } // Lebar kolom J (Netto)
                     ];
 
 
@@ -1599,10 +1746,14 @@
                  * Ekspor data laporan yang sedang ditampilkan ke format PDF.
                  */
                 exportToPDF() {
-                    const { jsPDF } = window.jspdf;
+                    const {
+                        jsPDF
+                    } = window.jspdf;
                     const doc = new jsPDF('landscape');
                     // 1. Edit variabel 'head'
-                    const head = [['No', 'No. Tiket', 'Tanggal', 'No. Polisi', 'Pelanggan', 'Barang', 'Gross (kg)', 'Tare (kg)', 'Netto (kg)']];
+                    const head = [
+                        ['No', 'No. Tiket', 'Tanggal', 'No. Polisi', 'Pelanggan', 'Barang', 'Gross (kg)', 'Tare (kg)', 'Netto (kg)']
+                    ];
 
                     // 2. Edit variabel 'body' agar urutannya SAMA PERSIS dengan 'head'
                     const body = this.filteredData.map((d, i) => [
@@ -1635,8 +1786,14 @@
                             doc.text(`PT. Sumber Ganda Mekar`, data.settings.margin.left, 22);
 
                             // Menambahkan tanggal laporan di sisi kanan
-                            const today = new Date().toLocaleDateString('id-ID', { day: '2-digit', month: 'long', year: 'numeric' });
-                            doc.text(`Tanggal: ${today}`, doc.internal.pageSize.getWidth() - data.settings.margin.right, 22, { align: 'right' });
+                            const today = new Date().toLocaleDateString('id-ID', {
+                                day: '2-digit',
+                                month: 'long',
+                                year: 'numeric'
+                            });
+                            doc.text(`Tanggal: ${today}`, doc.internal.pageSize.getWidth() - data.settings.margin.right, 22, {
+                                align: 'right'
+                            });
 
                             // Kembalikan ukuran font normal sebelum tabel digambar (jika perlu)
                             doc.setFontSize(10);
@@ -1652,8 +1809,13 @@
                  * Membuat file backup (JSON) dari semua data dan pengaturan.
                  */
                 backupData() {
-                    const dataStr = JSON.stringify({ data: this.data, settings: this.settings }, null, 2);
-                    const blob = new Blob([dataStr], { type: "application/json" });
+                    const dataStr = JSON.stringify({
+                        data: this.data,
+                        settings: this.settings
+                    }, null, 2);
+                    const blob = new Blob([dataStr], {
+                        type: "application/json"
+                    });
                     const url = URL.createObjectURL(blob);
                     const a = document.createElement("a");
                     a.href = url;
@@ -1722,7 +1884,11 @@
 
                     switch (period) {
                         case 'today':
-                            const todayStr = now.toLocaleDateString('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric' }).replace(/\./g, '/');
+                            const todayStr = now.toLocaleDateString('id-ID', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric'
+                            }).replace(/\./g, '/');
                             confirmMessage = 'Yakin ingin menghapus semua data transaksi hari ini?';
                             filterFn = d => d.date !== todayStr;
                             break;
@@ -1742,7 +1908,8 @@
                             confirmMessage = 'PERINGATAN! Ini akan menghapus SEMUA data transaksi. Apakah Anda benar-benar yakin?';
                             filterFn = d => false; // Fungsi yang selalu mengembalikan false untuk menghapus semua
                             break;
-                        default: return;
+                        default:
+                            return;
                     }
 
                     if (confirm(confirmMessage)) {
@@ -1773,7 +1940,9 @@
                     // Event untuk filter laporan
                     document.getElementById('applyFilters').addEventListener('click', this.applyFilters.bind(this));
                     document.getElementById('resetFilters').addEventListener('click', this.resetFilters.bind(this));
-                    this.searchQuery.addEventListener('keyup', (e) => { if (e.key === 'Enter') this.applyFilters(); });
+                    this.searchQuery.addEventListener('keyup', (e) => {
+                        if (e.key === 'Enter') this.applyFilters();
+                    });
 
                     // Event untuk tombol aksi di tabel laporan (Ubah, Hapus, Cetak)
                     this.reportTableBody.addEventListener('click', e => {
